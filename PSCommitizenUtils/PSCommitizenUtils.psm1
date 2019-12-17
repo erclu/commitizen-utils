@@ -1,9 +1,23 @@
 #Get public and private function definition files.
-$Public = @( Get-ChildItem -Recurse -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue )
-$Private = @( Get-ChildItem -Recurse -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue )
+$Files = @{
+  Classes = @( Get-ChildItem -Recurse -Path $PSScriptRoot\Classes\*.ps1 -ErrorAction SilentlyContinue )
+  Private = @( Get-ChildItem -Recurse -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue )
+  Public  = @( Get-ChildItem -Recurse -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue )
+}
 
-#Dot-source the files
-Foreach ($import in @($Public + $Private))
+foreach ($classFile in $Files.Classes)
+{
+  try
+  {
+    . $classFile
+  }
+  catch
+  {
+    Write-Error -Message "failed to import class $($classFile.FullName): $_"
+  }
+}
+
+Foreach ($import in @($Files.Public + $Files.Private))
 {
   Try
   {
