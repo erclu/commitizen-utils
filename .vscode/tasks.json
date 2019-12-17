@@ -13,6 +13,59 @@
         "clear": true
       },
       "problemMatcher": []
+    },
+    {
+      "label": "copy public function names to clipboard",
+      "type": "shell",
+      "command": "./.vscode/Copy-PublicFunctionNames.ps1",
+      "args": [
+        "PSCommitizenUtils"
+      ],
+      "presentation": {
+        "echo": false,
+        "reveal": "always",
+        "focus": true,
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": true
+      },
+      "problemMatcher": [],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Run local CI",
+      "dependsOn": [
+        "Run Pester tests",
+        "Run PSScriptAnalyzer"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Pester tests",
+      "type": "shell",
+      "command": "Invoke-Pester -EnableExit -Path \".\"",
+      "problemMatcher": [
+        "$pester"
+      ],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "Run PSScriptAnalyzer",
+      "type": "shell",
+      "command": "Invoke-ScriptAnalyzer -EnableExit -Settings PSScriptAnalyzerSettings.psd1 -Recurse -Path . | Format-Table -Autosize -Wrap",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "problemMatcher": []
     }
   ]
 }
