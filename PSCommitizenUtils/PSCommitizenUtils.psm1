@@ -5,26 +5,20 @@ $Files = @{
   Public  = @( Get-ChildItem -Recurse -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue )
 }
 
-foreach ($classFile in $Files.Classes)
-{
-  try
-  {
+foreach ($classFile in $Files.Classes) {
+  try {
     . $classFile
   }
-  catch
-  {
+  catch {
     Write-Error -Message "failed to import class $($classFile.FullName): $_"
   }
 }
 
-Foreach ($import in @($Files.Public + $Files.Private))
-{
-  Try
-  {
+Foreach ($import in @($Files.Public + $Files.Private)) {
+  Try {
     . $import.FullName
   }
-  Catch
-  {
+  Catch {
     Write-Error -Message "Failed to import function $($import.FullName): $_"
   }
 }

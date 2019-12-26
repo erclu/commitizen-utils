@@ -1,5 +1,4 @@
-function Read-CommitizenFriendlySummaries
-{
+function Read-CommitizenFriendlySummaries {
   [CmdletBinding()]
   param (
     # commit summary as obtained by git pretty-format '%s' specifier
@@ -8,8 +7,7 @@ function Read-CommitizenFriendlySummaries
     $summaries
   )
 
-  begin
-  {
+  begin {
     # there's a non capturing group around the optional scope.
     $summaryRegex = "(?<type>.*?)(?:\((?<scope>.*)\))?: (?<description>.*)"
 
@@ -17,12 +15,9 @@ function Read-CommitizenFriendlySummaries
     $successfulMatches = 0
   }
 
-  process
-  {
-    foreach ($summary in $summaries)
-    {
-      if ($summary -match $summaryRegex)
-      {
+  process {
+    foreach ($summary in $summaries) {
+      if ($summary -match $summaryRegex) {
         $successfulMatches++
 
         return [PSCustomObject]@{
@@ -31,19 +26,16 @@ function Read-CommitizenFriendlySummaries
           Description = $Matches["description"]
         }
       }
-      else
-      {
+      else {
         $failedMatches++
       }
     }
   }
 
-  end
-  {
+  end {
     Write-Verbose "parsed correctly $successfulMatches commit messages."
 
-    if ($failedMatches)
-    {
+    if ($failedMatches) {
       Write-Verbose "could not match $failedMatches commit messages."
     }
   }
