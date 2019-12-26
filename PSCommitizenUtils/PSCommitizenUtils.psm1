@@ -29,4 +29,4 @@ Foreach ($import in @($Files.Public + $Files.Private))
   }
 }
 
-Export-ModuleMember -Function $Public.Basename
+Export-ModuleMember -Function $Files.Public.Basename
