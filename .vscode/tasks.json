@@ -6,7 +6,7 @@
       "type": "shell",
       "command": "./.vscode/Copy-PublicFunctionNames.ps1",
       "args": [
-        "PSCommitizenUtils"
+        "PSConventionalCommitsUtils"
       ],
       "presentation": {
         "echo": false,
