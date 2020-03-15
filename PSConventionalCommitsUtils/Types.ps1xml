@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Types>
+  <Type>
+    <Name>PSConventionalCommitsUtils.Automation.Object.ConventionalCommitSummary</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>Author</Name>
+        <GetScriptBlock>$this.Author</GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Date</Name>
+        <GetScriptBlock>$this.Date</GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Type</Name>
+        <GetScriptBlock>$this.Type</GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Scope</Name>
+        <GetScriptBlock>$this.Scope</GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Description</Name>
+        <GetScriptBlock>$this.Description</GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+</Types>

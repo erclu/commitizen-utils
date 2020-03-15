@@ -1,0 +1,44 @@
+name: PowerShell Core CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Update PSScriptAnalyzer to latest version
+        run: Install-Module -Force -Scope CurrentUser -Name PSScriptAnalyzer
+        shell: pwsh
+
+      - name: run PSScriptAnalyzer
+        run: Invoke-ScriptAnalyzer -EnableExit -Settings PSScriptAnalyzerSettings.psd1 -Recurse -Path "."
+        shell: pwsh
+
+  test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Update Pester to latest version
+        run: Install-Module -Force -Scope CurrentUser -Name Pester
+        shell: pwsh
+
+      - name: Run pester tests
+        run: Invoke-Pester -EnableExit -Path "."
+        shell: pwsh

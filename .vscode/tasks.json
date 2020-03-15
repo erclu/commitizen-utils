@@ -2,24 +2,11 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "commitizen",
-      "type": "shell",
-      "command": "git cz",
-      "presentation": {
-        "reveal": "always",
-        "focus": true,
-        "panel": "dedicated",
-        "showReuseMessage": false,
-        "clear": true
-      },
-      "problemMatcher": []
-    },
-    {
       "label": "copy public function names to clipboard",
       "type": "shell",
       "command": "./.vscode/Copy-PublicFunctionNames.ps1",
       "args": [
-        "PSCommitizenUtils"
+        "PSConventionalCommitsUtils"
       ],
       "presentation": {
         "echo": false,
