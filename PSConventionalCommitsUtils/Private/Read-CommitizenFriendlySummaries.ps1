@@ -7,6 +7,7 @@ function Read-CommitizenFriendlySummaries {
     $summaries
   )
 
+  # TODO ignore merge commits
   begin {
     # there's a non capturing group around the optional scope.
     $summaryRegex = "(?<type>.*?)(?:\((?<scope>.*)\))?: (?<description>.*)"
@@ -35,8 +36,9 @@ function Read-CommitizenFriendlySummaries {
   end {
     Write-Verbose "parsed correctly $successfulMatches commit messages."
 
+    # FIXME this does not work as I expected
     if ($failedMatches) {
-      Write-Verbose "could not match $failedMatches commit messages."
+      Write-Error "could not match $failedMatches commit messages."
     }
   }
 }
